@@ -46,7 +46,7 @@ function generator(matLen, gr, grEat, pred, cact, hum) {
 
 let side = 20;
 
-let matrix = generator(15, 10, 5, 4, 5, 1);
+let matrix = generator(15, 10, 8, 6, 4, 3);
 let grassArr = []
 let grassEaterArr = []
 let predatorArr = []
@@ -63,18 +63,22 @@ function setup() {
             if (matrix[y][x] == 1) {
                 let gr = new Grass(x, y)
                 grassArr.push(gr)
-
-                let gr1 = new GrassEater(x, y)
-                grassEaterArr.push(gr1)
-
-                let gr2 = new Predator(x, y)
-                grassArr.push(gr2)
-
-                let gr3 = new Cactus(x, y)
-                grassArr.push(gr3)
-
-                let gr4 = new Human(x, y)
-                grassArr.push(gr4)
+            }
+            if (matrix[y][x] == 2) {
+                let gr = new GrassEater(x, y)
+                grassEaterArr.push(gr)
+            }
+            if (matrix[y][x] == 3) {
+                let gr = new Predator(x, y)
+                predatorArr.push(gr)
+            }
+            if (matrix[y][x] == 4) {
+                let gr = new Cactus(x, y)
+                cactusArr.push(gr)
+            }
+            if (matrix[y][x] == 5) {
+                let gr = new Human(x, y)
+                humanArr.push(gr)
             }
         }
     }
@@ -94,13 +98,13 @@ function draw() {
                 fill("yellow");
             }
             else if (matrix[y][x] == 3) {
-                fill("#red");
+                fill("red");
             }
             else if (matrix[y][x] == 4) {
-                fill("#black");
+                fill("black");
             }
             else if (matrix[y][x] == 5) {
-                fill("#blue");
+                fill("blue");
             }
             rect(x * side, y * side, side, side);
         }
@@ -115,7 +119,7 @@ function draw() {
         grassEaterArr[i].eat()
     }
     for (let i in predatorArr) {
-        predatorArr.mul()
+        predatorArr[i].mul()
         predatorArr[i].eat()
     }
     for (let i in humanArr) {

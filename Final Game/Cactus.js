@@ -28,11 +28,6 @@ class Cactus {
             }
         }
         return found;
-    
-    }
-    prickle() {
-        if(this.prickly == 1) {
-            
-        }
+
     }
 }

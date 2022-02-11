@@ -35,7 +35,6 @@ class Grass {
         this.multiply++;
         var emptyCells = this.chooseCell(0);
         var newCell = random(emptyCells);
-        console.log(emptyCells);
         if (newCell && this.multiply >= 60) {
             var newX = newCell[0];
             var newY = newCell[1];

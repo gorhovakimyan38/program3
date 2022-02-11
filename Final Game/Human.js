@@ -43,7 +43,6 @@ class Human {
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
         if (newCell && this.energy >= 0) {
-            console.log(newCell)
             var newX = newCell[0]
             var newY = newCell[1]
             matrix[newY][newX] = matrix[this.y][this.x]
@@ -114,9 +113,9 @@ class Human {
 
 die() {
     matrix[this.y][this.x] = 0;
-    for (var i in grassEaterArr) {
-        if (this.x == grassEaterArr[i].x && this.y == grassEaterArr[i].y) {
-            grassEaterArr.splice(i, 1);
+    for (var i in HumanArr) {
+        if (this.x == HumanArr[i].x && this.y == HumanArr[i].y) {
+            HumanArr.splice(i, 1);
             break;
         }
     }
