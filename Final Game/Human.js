@@ -1,6 +1,8 @@
 class Human extends LivingCreature {
     constructor(x, y) {
         super(x, y);
+        this.gun = (Math.round*(Math.random))
+        this.energy = 8
     }
 
     move() {
