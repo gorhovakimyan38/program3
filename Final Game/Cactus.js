@@ -1,6 +1,6 @@
 class Cactus extends LivingCreature {
     constructor(x, y) {
-        super(x, y, multiply);
+        super(x, y);
     }
 
     chooseCell(character) {
