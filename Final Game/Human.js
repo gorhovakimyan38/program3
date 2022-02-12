@@ -1,8 +1,8 @@
 class Human extends LivingCreature {
     constructor(x, y) {
-        super(x, y), multiply;
+        super(x, y, multiply);
     }
-
+    
     move() {
         this.energy--
         var emptyCells = this.chooseCell(0)
