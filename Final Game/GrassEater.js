@@ -1,6 +1,7 @@
 class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x, y);
+        this.energy = 15 
     }
 
     getNewCoordinates() {
@@ -17,7 +18,7 @@ class GrassEater extends LivingCreature {
     }
 
     mul() {
-        this.energy -= 2
+        this.energy-=2
         this.multiply++;
         var emptyCells = this.chooseCell(0);
         var newCell = random(emptyCells);

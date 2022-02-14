@@ -26,7 +26,7 @@ class Human extends LivingCreature {
     }
 
     eatgrassEater() {
-        if (this.gun = true) {
+        if (this.gun = 1) {
             var emptyCells = this.chooseCell(2)
             var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
@@ -52,7 +52,7 @@ class Human extends LivingCreature {
         }
     }
     eatpredator() {
-        if (this.gun = true) {
+        if (this.gun = 1) {
             var emptyCells = this.chooseCell(3)
             var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 

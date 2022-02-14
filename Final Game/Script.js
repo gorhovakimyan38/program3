@@ -46,7 +46,7 @@ function generator(matLen, gr, grEat, pred, cact, hum) {
 
 let side = 20;
 
-let matrix = generator(30, 20, 15, 10, 7, 5);
+let matrix = generator(30, 35, 25, 20, 15, 10);
 let grassArr = []
 let grassEaterArr = []
 let predatorArr = []

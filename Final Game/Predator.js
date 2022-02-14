@@ -1,7 +1,7 @@
 class Predator extends LivingCreature {
     constructor(x, y) {
         super(x, y);
-        this.energy = 8
+        this.energy = 15
     }
 
     mul() {
