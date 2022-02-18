@@ -1,4 +1,5 @@
-class Human extends LivingCreature {
+let Human = require('Human')
+module.exports = class Human extends LivingCreature {
     constructor(x, y) {
         super(x, y);
         this.gun = (Math.round*(Math.random))
