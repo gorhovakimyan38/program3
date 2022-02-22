@@ -1,4 +1,5 @@
-let LivingCreature3 = require('./LivingCreature')
+let LivingCreature = require('./LivingCreature')
+
 module.exports = class Predator extends LivingCreature {
     constructor(x, y) {
         super(x, y);
@@ -44,7 +45,7 @@ module.exports = class Predator extends LivingCreature {
 
     eat() {
         var emptyCells = this.chooseCell(1)
-        var newCell = emptyCells[Math.floor(Math.random() * grassEaterCells.length)]
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
         if (newCell) {
             var newX = newCell[0]
@@ -56,10 +57,10 @@ module.exports = class Predator extends LivingCreature {
             this.x = newX
             this.y = newY
             this.energy++
-                if (this.energy >= 12) {
-                    console.log(this.energy);
-                    this.mul();
-                }
+            if (this.energy >= 12) {
+                console.log(this.energy);
+                this.mul();
+            }
         }
         else {
             this.move()

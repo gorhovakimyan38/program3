@@ -1,9 +1,8 @@
-var express = require("./express");
+var express = require("express");
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs');
-const { userInfo } = require("os");
 
 app.use(express.static('.'));
 
@@ -11,9 +10,10 @@ app.get('/', function (req, res) {
     res.redirect('index.html')
 });
 
-server.listen(2999, () => {
+server.listen(3000, () => {
     console.log('connected');
 })
+
 
 
 
@@ -62,23 +62,20 @@ function generator(matLen, gr, grEat, pred, cact, hum) {
     }
     return matrix;
 }
+ matrix = generator(30, 35, 25, 20, 15, 10);
+io.sockets.emit('send matrix', matrix)
 
-let side = 20;
-
-let matrix = generator(30, 35, 25, 20, 15, 10);
-let grassArr = []
-let grassEaterArr = []
-let predatorArr = []
-let cactusArr = []
-let humanArr = []
+ grassArr = []
+ grassEaterArr = []
+ predatorArr = []
+ cactusArr = []
+ humanArr = []
 
 Grass = require('./Grass')
 GrassEater = require('./GrassEater')
 Predator = require('./Predator')
 Cactus = require('./Cactus')
 Human = require('./Human')
-
-io.sockets.emit('send matrix', matrix)
 
 function createObject(matrix) {
     for (var y = 0; y < matrix.length; y++) {
@@ -88,28 +85,28 @@ function createObject(matrix) {
                 grassArr.push(gr)
             }
             if (matrix[y][x] == 2) {
-                let gr = new GrassEater(x, y)
-                grassEaterArr.push(gr)
+                let grEater = new GrassEater(x, y)
+                grassEaterArr.push(grEater)
             }
             if (matrix[y][x] == 3) {
-                let gr = new Predator(x, y)
-                predatorArr.push(gr)
+                let pred = new Predator(x, y)
+                predatorArr.push(pred)
             }
             if (matrix[y][x] == 4) {
-                let gr = new Cactus(x, y)
-                cactusArr.push(gr)
+                let cact = new Cactus(x, y)
+                cactusArr.push(cact)
             }
             if (matrix[y][x] == 5) {
-                let gr = new Human(x, y)
-                humanArr.push(gr)
+                let hum = new Human(x, y)
+                humanArr.push(hum)
             }
         }
     }
 }
-io.sockets.emit('sendObject',createObject)
+io.sockets.emit('send matrix', matrix)
 
 
-function game () {
+function game() {
     for (let i in grassArr) {
         grassArr[i].mul()
     }
@@ -122,14 +119,14 @@ function game () {
         predatorArr[i].eat()
     }
     for (let i in cactusArr) {
-        cactusArr[i].kill()
+        cactusArr[i].eat()
     }
     for (let i in humanArr) {
-        humanArr[i].kill()
+        humanArr[i].eat()
     }
 }
-setInterval(game,1000)
-io.sockets.emit('sendgame',game)
+io.sockets.emit('send matrix', matrix)
+setInterval(game, 1000)
 
 
 io.on('connection', function () {

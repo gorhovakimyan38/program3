@@ -1,4 +1,4 @@
-let LivingCreature5 = require('./LivingCreature')
+let LivingCreature = require('./LivingCreature')
 module.exports = class Human extends LivingCreature {
     constructor(x, y) {
         super(x, y);
@@ -28,11 +28,11 @@ module.exports = class Human extends LivingCreature {
         }
     }
 
-    kill() {
+   eat() {
         var emptyCells = this.chooseCell(1)
-        var newCell = emptyCells[Math.floor(Math.random() * grassEaterCells.length ||  emptyCells[Math.floor(Math.random() * predatorCells.length)]
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length )]
 
-        if(newCell && this.gun == 1) {
+        if (newCell && this.gun == 1) {
             var newX = newCell[0]
             var newY = newCell[1]
 

@@ -1,6 +1,6 @@
-let LivingCreature0 = require('./LivingCreature')
+
 module.exports = class LivingCreature {
-    constructor(x,y) {
+    constructor(x, y) {
         this.x = x
         this.y = y
         this.directions = [

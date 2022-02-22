@@ -1,14 +1,14 @@
-let LivingCreature4 = require("./LivingCreature")
+let LivingCreature  = require("./LivingCreature")
 module.exports = class Cactus extends LivingCreature {
     constructor(x, y) {
         super(x, y);
-        this.prickly = [Math.floor*(Math.random)]
+        this.prickly = [Math.floor * (Math.random)]
     }
-    kill() {
-        var emptyCells = this.chooseCell(1)
-        var newCell = emptyCells[Math.floor(Math.random() * grassEaterCells.length ||  emptyCells[Math.floor(Math.random() * predatorCells.length)]
+    eat() {
+        var emptyCells = super.chooseCell(1)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length )]
 
-        if(newCell && this.prickly == 1) {
+        if(newCell && this.prickly == 1){
             var newX = newCell[0]
             var newY = newCell[1]
 
@@ -18,9 +18,6 @@ module.exports = class Cactus extends LivingCreature {
             this.x = newX
             this.y = newY
             this.energy++
-        }
-        else {
-            this.move()
         }
     }
 }
