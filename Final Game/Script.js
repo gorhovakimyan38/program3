@@ -1,6 +1,6 @@
 var socket = io();
 
-var side = 30;
+var side = 10;
 
 
 function setup() {
@@ -8,7 +8,7 @@ function setup() {
     background('#acacac');
 }
 
-function fillr() {
+function fillr(matrix) {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             var obj = matrix[y][x]

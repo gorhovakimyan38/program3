@@ -11,7 +11,7 @@ module.exports = class Human extends LivingCreature {
         var emptyCells = super.chooseCell(0)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
-        if (newCell && this.energy >= 0) {
+        if (newCell) {
 
             var newX = newCell[0]
             var newY = newCell[1]
@@ -21,7 +21,7 @@ module.exports = class Human extends LivingCreature {
 
             this.x = newX
             this.y = newY
-            this.energy--
+            this.energy--;
         }
         if (this.energy <= 0) {
             this.die()
@@ -29,8 +29,8 @@ module.exports = class Human extends LivingCreature {
     }
 
    eat() {
-        var emptyCells = this.chooseCell(1)
-        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length )]
+        var grassEaterCells = this.chooseCell(1)
+        var newCell = grassEaterCells[Math.floor(Math.random() * emptyCells.length )]
 
         if (newCell && this.gun == 1) {
             var newX = newCell[0]
@@ -38,6 +38,12 @@ module.exports = class Human extends LivingCreature {
 
             matrix[newY][newX] = matrix[this.y][this.x]
             matrix[this.y][this.x] = 0
+
+            for (var i in grassEaterArr) {
+				if (grassEaterArr[i].x == newX && grassEaterArr[i].y == newY) {
+					grassEaterArr.splice(i, 1)
+				}
+			}
 
             this.x = newX
             this.y = newY
@@ -47,7 +53,12 @@ module.exports = class Human extends LivingCreature {
             this.move()
         }
     }
-    die() {
-        matrix[this.y][this.x] = 0;
-    }
+    die()  {
+		matrix[this.y][this.x] = 0;
+		for (var i in humanArr) {
+			if (humanArr[i].x == this.x && humanArr[i].y == this.y) {
+				humanArr.splice(i, 1)
+			}
+		}
+	}
 }
