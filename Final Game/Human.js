@@ -2,7 +2,7 @@ let LivingCreature = require('./LivingCreature')
 module.exports = class Human extends LivingCreature {
     constructor(x, y) {
         super(x, y);
-        this.gun = [Math.floor * (Math.random)]
+        this.gun = 0
         this.energy = 8
     }
 
@@ -29,10 +29,10 @@ module.exports = class Human extends LivingCreature {
     }
 
    eat() {
-        var grassEaterCells = this.chooseCell(1)
-        var newCell = grassEaterCells[Math.floor(Math.random() * emptyCells.length )]
+        var grassEaterCells = super.chooseCell(2)
+        var newCell = grassEaterCells[Math.floor(Math.random() * grassEaterCells.length )]
 
-        if (newCell && this.gun == 1) {
+        if (newCell) {
             var newX = newCell[0]
             var newY = newCell[1]
 
@@ -42,12 +42,17 @@ module.exports = class Human extends LivingCreature {
             for (var i in grassEaterArr) {
 				if (grassEaterArr[i].x == newX && grassEaterArr[i].y == newY) {
 					grassEaterArr.splice(i, 1)
+                    break
 				}
 			}
 
             this.x = newX
             this.y = newY
             this.energy++
+            this.gun++
+            if(this.gun > 1) {
+                this.gun = 1
+            }
         }
         else {
             this.move()
@@ -58,6 +63,7 @@ module.exports = class Human extends LivingCreature {
 		for (var i in humanArr) {
 			if (humanArr[i].x == this.x && humanArr[i].y == this.y) {
 				humanArr.splice(i, 1)
+                break
 			}
 		}
 	}

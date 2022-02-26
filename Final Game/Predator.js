@@ -15,9 +15,8 @@ module.exports = class Predator extends LivingCreature {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 3
-            var pred = new Predator(newX, newY, 3);
             predatorArr.push(new Predator(newX, newY, 3))
-			this.energy = 6;
+			this.multiply = 0;
         }
     }
 
@@ -38,14 +37,14 @@ module.exports = class Predator extends LivingCreature {
             this.y = newY
             this.energy--;
         }
-        if (this.energy <= 0) {
+        else if (this.energy <= 0) {
             this.die()
         }
     }
 
     eat() {
-        var grassEaterCells = super.chooseCell(1)
-        var newCell = grassEaterCells[Math.floor(Math.random() * emptyCells.length)]
+        var grassEaterCells = super.chooseCell(2)
+        var newCell = grassEaterCells[Math.floor(Math.random() * grassEaterCells.length)]
 
         if (newCell) {
 
@@ -58,16 +57,16 @@ module.exports = class Predator extends LivingCreature {
 			for (var i in grassEaterArr) {
 				if (grassEaterArr[i].x == newX && grassEaterArr[i].y == newY) {
 					grassEaterArr.splice(i, 1)
+                    break
 				}
 			}
 
 			this.x = newX;
 			this.y = newY;
-			this.energy++;
+			this.energy+=3;
 
 			if (this.energy >= 12) {
 				this.mul();
-				this.energy = 8
 			}
 
 		}
@@ -81,6 +80,7 @@ module.exports = class Predator extends LivingCreature {
 		for (var i in predatorArr) {
 			if (predatorArr[i].x == this.x && predatorArr[i].y == this.y) {
 				predatorArr.splice(i, 1)
+                break
 			}
 		}
 	}

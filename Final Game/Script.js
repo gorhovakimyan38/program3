@@ -1,6 +1,6 @@
 var socket = io();
 
-var side = 10;
+var side = 25;
 
 
 function setup() {
