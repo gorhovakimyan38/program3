@@ -93,7 +93,7 @@ setInterval(game, 500)
 function changeWeather() {
     weat();
 }
-socket.on ('weather', function(data){
+socket.on('weather', function(data){
     weather1 = data;
     document.getElementById("weather").innerHTML = weather1;
     document.getElementById("wstyle").style.backgroundColor = weathSwitcher[weather1]
@@ -102,6 +102,6 @@ socket.on ('weather', function(data){
 })
 
 
-io.on('connection', function (socket) {
+io.on('connection', function () {
     createObject();
 });
