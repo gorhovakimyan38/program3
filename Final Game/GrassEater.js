@@ -69,6 +69,11 @@ module.exports = class GrassEater extends LivingCreature {
             this.move()
         }
     }
+    cold() {
+        if(w1 == 'autumn' || 'winter') {
+            
+        }
+    }
 
     die() {
         matrix[this.y][this.x] = 0;

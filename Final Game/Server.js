@@ -20,59 +20,27 @@ cactusArr = []
 humanArr = []
 matrix = []
 
+
+
 Grass = require('./Grass')
 GrassEater = require('./GrassEater')
 Predator = require('./Predator')
 Cactus = require('./Cactus')
 Human = require('./Human')
 
-function generator(matLen, gr, grEat, pred, cact, hum) {
-    let matrix = [];
-    for (let i = 0; i < matLen; i++) {
-        matrix[i] = [];
-        for (let j = 0; j < matLen; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    for (let i = 0; i < gr; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 1;
-        }
-    }
-    for (let i = 0; i < grEat; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 2;
-        }
-    }
-    for (let i = 0; i < pred; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 3;
-        }
-    }
-    for (let i = 0; i < cact; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 4;
-        }
-    }
-    for (let i = 0; i < hum; i++) {
-        let x = Math.floor(Math.random() * matLen);
-        let y = Math.floor(Math.random() * matLen);
-        if (matrix[x][y] == 0) {
-            matrix[x][y] = 5;
-        }
-    }
-    return matrix;
+var n = 50
+
+function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+for (let i = 0; i < n; i++) {
+    matrix[i] = [];
+    for (let j = 0; j < n; j++) {
+        matrix[i][j] = Math.floor(rand(0, 5))
+        
+    }  
 }
-matrix = generator(30, 1, 1, 1, 1, 1);
-io.sockets.emit('send matrix', matrix)
 
 io.sockets.emit('send matrix', matrix)
 
@@ -98,28 +66,6 @@ function createObject() {
     }
     io.sockets.emit('send matrix', matrix)
 }
-var w1 = 'no weather'
-function weather(weather) {
-    if(weather == 1){
-       w1 = 'spring'
-    }
-    else if(weather == 2) {
-        w1 = 'summer'
-    }
-    else if(weather == 3) {
-        w1 = 'autumn'
-    }
-    else if(weather == 4) {
-        w1 = 'winter'
-    }
-    io.sockets.emit('weather', w1)
-}
-setInterval(weather, 5000);
-
-
-
-
-
 
 function game() {
     for (let i in grassArr) {
@@ -143,6 +89,17 @@ function game() {
 }
 
 setInterval(game, 500)
+
+function changeWeather() {
+    weat();
+}
+socket.on ('weather', function(data){
+    weather1 = data;
+    document.getElementById("weather").innerHTML = weather1;
+    document.getElementById("wstyle").style.backgroundColor = weathSwitcher[weather1]
+   
+      changer();
+})
 
 
 io.on('connection', function (socket) {
