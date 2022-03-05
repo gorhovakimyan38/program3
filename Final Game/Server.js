@@ -18,7 +18,6 @@ grassEaterArr = []
 predatorArr = []
 cactusArr = []
 humanArr = []
-matrix = []
 
 
 
@@ -28,19 +27,54 @@ Predator = require('./Predator')
 Cactus = require('./Cactus')
 Human = require('./Human')
 
-var n = 50
-
-function rand(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-for (let i = 0; i < n; i++) {
-    matrix[i] = [];
-    for (let j = 0; j < n; j++) {
-        matrix[i][j] = Math.floor(rand(0, 5))
-        
-    }  
+function generator(matLen, gr, grEat, pred, cact, hum) {
+    matrix = []
+    for (let i = 0; i < matLen; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < matLen; j++) {
+            matrix[i][j] = 0;
+        }
+    }
+    for (let i = 0; i < gr; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 1;
+        }
+    }
+    for (let i = 0; i < grEat; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 2;
+        }
+    }
+    for (let i = 0; i < pred; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 3;
+        }
+    }
+    for (let i = 0; i < cact; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 4;
+        }
+    }
+    for (let i = 0; i < hum; i++) {
+        let x = Math.floor(Math.random() * matLen);
+        let y = Math.floor(Math.random() * matLen);
+        if (matrix[x][y] == 0) {
+            matrix[x][y] = 5;
+        }
+    }
+    return matrix;
 }
+
+matrix = generator(50, 10, 8, 6, 4, 3);
+
 
 io.sockets.emit('send matrix', matrix)
 
@@ -66,6 +100,9 @@ function createObject() {
     }
     io.sockets.emit('send matrix', matrix)
 }
+function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 
 function game() {
     for (let i in grassArr) {
@@ -90,16 +127,28 @@ function game() {
 
 setInterval(game, 500)
 
-function changeWeather() {
-    weat();
+var weath;
+
+function weather() {
+    weath = 'winter'
+    io.sockets.emit('weather', weath)
 }
-socket.on('weather', function(data){
-    weather1 = data;
-    document.getElementById("weather").innerHTML = weather1;
-    document.getElementById("wstyle").style.backgroundColor = weathSwitcher[weather1]
-   
-      changer();
-})
+setInterval(weather,1000)
+
+function gameStat() {
+    count = {
+        grass:grassArr.length,
+        grassEater:grassEaterArr.length,
+        predator:predatorArr.length,
+        cactus:cactusArr.length,
+        human:humanArr.length,
+    }
+    fs.writeFile('statistics.json', JSON.stringify(count), ()=>{
+        io.sockets.emit('send state', count)
+    })
+}
+
+setInterval(gameStat, 300)
 
 
 io.on('connection', function () {

@@ -1,22 +1,19 @@
+// Chart.js   search Google ----------------------
+
 var socket = io();
 
 var side = 25;
 
-function changer(){
-    if(weather1 == "winter"){
-        document.getElementById("wstyle").style.color = "#8d05e8";
-    }
-    else{
-        document.getElementById("wstyle").style.color = "white";
-    }
-}
+socket.on("weather", function (data) {
+    weath = data;
+})
 
 
 function setup() {
     createCanvas(50 * side, 50 * side);
-    background('#acacac')
-    // if (weath == 'summer') {
-    //     background('red');
+    background('acacac')
+    // if (weath == 0) {
+    //     background('white');
     // }
 
     // if (weath == 'spring') {
@@ -29,7 +26,18 @@ function setup() {
     // if (weath == 'winter') {
     //     background('white');
     // }
-
+    var grass_stat = document.getElementById("grass_stat");
+    var grassEater_stat = document.getElementById("grassEater_stat");
+    var predator_stat = document.getElementById("predator_stat");
+    var cactus_stat = document.getElementById("cactus_stat");
+    var human_stat = document.getElementById("human_stat");
+    socket.on('send state', function (count) {
+        grass_stat.innerText = "Grass(ligth green) " + count.grass
+        grassEater_stat.innerText = "GrassEater(yellow) " + count.grassEater
+        predator_stat.innerText = "Predator(red) " + count.predator
+        cactus_stat.innerText = "Cactus(green) " + count.cactus
+        human_stat.innerText = "Human(ligth yellow) " + count.human
+    })
 }
 
 function fillr(matrix) {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,78 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
     <script src="script.js"></script>
+    <style>
+        .state{
+            min-width: 20%;
+            height: auto;
+            background-color: grey;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }        
+    </style>
+
 </head>
+
 <body>
-    <div class="tools">
-        <h1 style="color:yellowgreen">Events</h1>
-        <a onclick="changeWeather()" class="btn effect01" target="_blank"><span>Weather</span></a>
+    <div class="state">
+        <p id="grass_stat" style="color:lightgreen"></p>
+        <p id="grassEater_stat" style="color:yellow"></p>
+        <p id="predator_stat" style="color:red"></p>
+        <p id="cactus_stat" style="color:green"></p>
+        <p id="human_stat" style="color:lightyellow"></p>
     </div>
+
+<div class ='b'>
+    <div class="b1">
+        <h1 style="color:red">Buttons</h1>
+        <h2 style='color:blue'>Weather</h2>
+        <ul>
+            <li>
+                <button onclick="wint()">Change w to winter</button>
+            </li>
+            <li>
+                <button onclick="spr()">Change w to spring</button>
+            </li>
+            <li>
+                <button onclick="summ()">Change w to summer</button>
+            </li>
+            <li>
+                <button onclick="aut()">Change w to autumn</button>
+            </li>
+        </ul>
+        </div>
+
+
+        <div class='b2'>
+            <h2 style='color:aquamarine'>Characters</h2>
+            <ul>
+                <li>
+                    <button onclick="addGr()">Add Grass</button>
+                </li>
+                <li>
+                    <button onclick="addGre()">Add GrassEater</button>
+                </li>
+                <li>
+                    <button onclick="addPre()">Add Predator</button>
+                </li>
+                <li>
+                    <button onclick="addCac()">Add Cactus</button>
+                </li>
+                <li>
+                    <button onclick="addHum()">Add Human</button>
+                </li>
+                <li>
+                    <button onclick="bomb()">Nuclear Bomb</button>
+                </li>
+                <li>
+                    <button onclick="ench()">SuperCharacter</button>
+                </li>
+            </ul>
+            </div>
+
+
+        </div>
 </body>
+
 </html>
